@@ -9,10 +9,10 @@ int main()
 	printf("show unumber?\n 1.yes 2.no");
 	scanf("%d",&choic);
 	urand(a,UNUMBER);
-	if(choic==1)
-	show(a,UNUMBER);
 	at = clock();
 	Syssort(a,UNUMBER);
+	if(choic==1)
+	show(a,UNUMBER);
 	bt = clock();
 	printf("Syssort times = %lf\n",(bt*1.0-at)/CLOCKS_PER_SEC);
 	urand(a,UNUMBER);

@@ -5,8 +5,10 @@ void show(int *a,int n)
 	int i;
 	for(i=0;i<n;i++)
 	{
-		printf("a[%d]=%d\n",i,a[i]);
+		printf("a[%d]=%d\t",i,a[i]);
+		if(i && i%6==0) printf("\n");
 	}
+	printf("\n");
 }
 
 void urand(int *a,int n)
