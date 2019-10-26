@@ -6,9 +6,9 @@
 #include <fcntl.h>
 #include <string.h>
 
-char *infor[8]={"---","--x","-w-","-wx","r--","r-x","rw-","rwx"};
+const char *infor[8]={"---","--x","-w-","-wx","r--","r-x","rw-","rwx"};
 
-int main()
+void meun()
 {
 	int choic=-1;
 	char name[260]={0};
@@ -21,7 +21,7 @@ int main()
 	printf("2.写文件\n");
 	printf("3.读文件\n");
 	printf("4.修改文件权限\n");
-	printf("5.查看当前文件的权限\n");
+	printf("5.查看当前文件的权限,并修改权限\n");
 	printf("****************\n");
 	
 	while(1)
@@ -71,5 +71,9 @@ int main()
 		}
 	}
 	close(fd);
-	//fchmod(fd,777);
+}
+
+int main()
+{
+	meun();
 }
