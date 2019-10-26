@@ -1,0 +1,15 @@
+#dongtaiku
+
+#!/bin/bash -v
+gcc -fPIC -shared -o libmydld.so mydld.c	#build dll command
+gcc -o slocaltest localtest.c -ldl -w		#compiler
+########开始运行########
+./slocaltest					#run
+
+
+#static lib
+
+#!/bin/bash -v
+gcc -c fun1.c fun2.c
+ar -rc libmy.a fun1.o fun2.o
+gcc -o main main.c -L. -lmy
