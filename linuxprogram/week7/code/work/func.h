@@ -5,8 +5,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <dlfcn.h>
 
-void meun();
 void creatfile_1(int * fd,char *name);
 void writefile_1(int fd,char * buf);
 void readfile(int fd,char *buf);
