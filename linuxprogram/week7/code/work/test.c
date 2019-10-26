@@ -38,14 +38,16 @@ void meun()
 			break;
 			case 4:
 				modifyauthority(fd,buf);
-			case 5:{
+			break;
+			case 5:
 				checkauthority(fd,buf);
 				break;
-			}
 		}
 		choic=0;
 	}
 	close(fd);
+	sprintf(buf,"rm %s",name);
+	system(buf);
 }
 
 int main()

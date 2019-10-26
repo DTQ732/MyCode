@@ -27,12 +27,14 @@ void readfile(int fd,char *buf)
 }
 void modifyauthority(int fd,char *buf)
 {
+	showauthority(fd,buf);
 	printf("please input file rights:");
 	scanf("%s",buf);
-	int r = (buf[0]-'0')*64 + (buf[1]-'0')*8+(buf[0]-'0');
+	int r = (buf[0]-'0')*64 + (buf[1]-'0')*8+(buf[2]-'0');
 	fchmod(fd,r);
+	showauthority(fd,buf);
 }
-void checkauthority(int fd,char *buf)
+void showauthority(int fd,char * buf)
 {
 	struct stat st;
 	fstat(fd,&st);
@@ -40,5 +42,8 @@ void checkauthority(int fd,char *buf)
 	printf("属主权限 %s",infor[buf[3]-'0']);
 	printf(" 组权限  %s",infor[buf[4]-'0']);
 	printf("其他权限 %s\n",infor[buf[5]-'0']);
+}
+void checkauthority(int fd,char *buf)
+{
 	modifyauthority(fd,buf);
 }

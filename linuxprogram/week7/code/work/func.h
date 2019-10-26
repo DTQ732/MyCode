@@ -11,4 +11,5 @@ void creatfile_1(int * fd,char *name);
 void writefile_1(int fd,char * buf);
 void readfile(int fd,char *buf);
 void modifyauthority(int fd,char *buf);
+void showauthority(int fd,char * buf);
 void checkauthority(int fd,char *buf);
