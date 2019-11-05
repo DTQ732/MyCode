@@ -1,0 +1,5 @@
+execl		list argrument	execl("./test",arg1,arg2,...,NULL)
+execv		execv("./text",argv)
+execlp		auto find exe in ENV_PATH
+
+abc 123 456
