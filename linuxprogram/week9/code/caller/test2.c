@@ -8,7 +8,7 @@ int main(int argc,char *argv[])
 {
 	int y=0;
 	static int w = 10;
-	printf("test1:pid=%d,ppid=%d\n",getpid(),getppid());
+	printf("test2:pid=%d,ppid=%d\n",getpid(),getppid());
 	
 	for(int i=0;i<argc;i++)
 	{
