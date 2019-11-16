@@ -4,13 +4,6 @@
 在执行fork/vfork操作后，父进程会复制所有的资源，包括文件描述符给子进程。编程验证父子进程对于相同文件操作时，是否会相互影响，即两者是会共享文件指针，还是拥有自己各自独立的指针体系。请编写两个版本（fork版和vfork版），实验结果贴图于答案区并附文字说明。源代码附件形式提交。
 */
 
-static void callback1(){
-	printf("--------callback1---------\n");
-}
-
-static void callback2(){
-        printf("--------callback2---------\n");
-}
 
 static void __attribute__ ((constructor)) before_main(){
 	printf("--------constructor--------\n");
@@ -22,8 +15,6 @@ static void __attribute__ ((destructor)) after_main(){
 
 int main(int argc,char*argv[])
 {
-	atexit(callback1);
-	atexit(callback2);
 	FILE*fp;
 	int fd;
 	char buf1[]="child :test data from full buffer!\n";
@@ -39,8 +30,30 @@ int main(int argc,char*argv[])
 		perror("failed to fopen!\n");
 		return -1;	
 	}
-	pid_t pid;
-	pid = fork();
+	printf("before fork\n");
+	pid_t pid= -1;
+	if (argc >1)
+	{
+		if (strcmp(argv[1],"fork") ==0)
+		{
+			printf("fork\n");
+			pid = fork();
+		}
+		else if (strcmp(argv[1],"vfork") ==0)
+		{
+			printf("vfork\n");
+			pid = vfork();
+		}
+		
+	}
+	else 
+	{
+		printf("no fork,exit\n");
+		exit(0);
+	}
+	
+	
+	
 	
 	if (pid==0)
 	{
@@ -55,6 +68,8 @@ int main(int argc,char*argv[])
 		{
 			perror("child:failed to fputs\n");
 		}
+		
+		exit(0);
 	}
 	else if (pid >0)
 	{
@@ -62,16 +77,14 @@ int main(int argc,char*argv[])
 		
 		if (fputs(buf2,fp)==EOF)
 		{
-			perror("failed to fputs\n");
+			perror("parent:failed to fputs\n");
 		}
-		printf("printf:data from line buffer");
 	
 		if (write(fd,buf2,sizeof(buf2)+1) == EOF)
 		{
-			perror("failed to fputs\n");
+			perror("parent:failed to write\n");
 		}
+		
 	}
-	
-	
-	
+	return 0;
 }
